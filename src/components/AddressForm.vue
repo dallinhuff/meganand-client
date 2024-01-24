@@ -2,7 +2,7 @@
 import TextInput from './TextInput.vue'
 import SelectInput from './SelectInput.vue'
 import { Countries, States } from '../Constants.ts'
-import { useInputRef, useValidationErrors, ValidationErrors } from './InputVar.ts'
+import { useInputRef, useValidationErrors, ValidationErrors } from '../composables/InputVar.ts'
 
 type InputKey =
   'firstName' |
@@ -67,16 +67,18 @@ async function update(): Promise<void> {
 <template>
   <form
     @submit.prevent="update"
-    class="grid grid-cols-2 gap-2 min-w-72 w-full max-w-xl p-4 pb-6 border-2 rounded-2xl">
+    class="grid grid-cols-2 gap-2 min-w-72 w-full max-w-xl p-4 pb-6 border-2 rounded-2xl shadow-xl">
     <TextInput
       required
       v-model="firstName"
       label="First Name"
+      class="col-span-2 sm:col-span-1"
       :validationError="validationError?.firstName"/>
     <TextInput
       required
       v-model="lastName"
       label="Last Name"
+      class="col-span-2 sm:col-span-1"
       :validationError="validationError?.lastName"/>
     <TextInput
       required
