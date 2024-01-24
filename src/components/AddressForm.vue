@@ -2,21 +2,31 @@
 import TextInput from './TextInput.vue'
 import SelectInput from './SelectInput.vue'
 import { Countries, States } from '../Constants.ts'
-import { useInputVar, useValidationError, ValidationError } from './InputVar.ts'
+import { useInputRef, useValidationErrors, ValidationErrors } from './InputVar.ts'
 
-const validationError = useValidationError()
+type InputKey =
+  'firstName' |
+  'lastName' |
+  'addrLine1' |
+  'addrLine2' |
+  'city' |
+  'state' |
+  'zipCode' |
+  'country'
 
-const firstName = useInputVar(validationError)('firstName'),
-      lastName  = useInputVar(validationError)('lastName'),
-      addrLine1 = useInputVar(validationError)('addrLine1'),
-      addrLine2 = useInputVar(validationError)('addrLine2'),
-      city      = useInputVar(validationError)('city'),
-      state     = useInputVar(validationError)('state'),
-      zipCode   = useInputVar(validationError)('zipCode'),
-      country   = useInputVar(validationError)('country', Countries[0])
+const validationError = useValidationErrors<InputKey>()
+
+const firstName = useInputRef(validationError, 'firstName'),
+      lastName  = useInputRef(validationError, 'lastName'),
+      addrLine1 = useInputRef(validationError, 'addrLine1'),
+      addrLine2 = useInputRef(validationError, 'addrLine2'),
+      city      = useInputRef(validationError, 'city'),
+      state     = useInputRef(validationError, 'state'),
+      zipCode   = useInputRef(validationError, 'zipCode'),
+      country   = useInputRef(validationError, 'country', Countries[0])
 
 async function update(): Promise<void> {
-  const errors: ValidationError = {}
+  const errors: ValidationErrors<InputKey> = {}
 
   if (!firstName.value?.length)
     errors.firstName = 'cannot be blank'
