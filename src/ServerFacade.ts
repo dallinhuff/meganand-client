@@ -1,7 +1,0 @@
-function createAddress() {
-
-}
-
-function getAddresses() {
-
-}

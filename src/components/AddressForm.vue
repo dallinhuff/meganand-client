@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import TextInput from './TextInput.vue'
 import SelectInput from './SelectInput.vue'
-import { Countries, States } from '../Constants.ts'
+import { States } from '../Constants.ts'
 import { useInputRef, useValidationErrors, ValidationErrors } from '../composables/InputVar.ts'
+import { AddressService } from '../services/AddressService.ts'
+import { computed } from 'vue'
 
 type InputKey =
   'firstName' |
@@ -11,8 +13,7 @@ type InputKey =
   'addrLine2' |
   'city' |
   'state' |
-  'zipCode' |
-  'country'
+  'zipCode'
 
 const validationError = useValidationErrors<InputKey>()
 
@@ -22,8 +23,19 @@ const firstName = useInputRef(validationError, 'firstName'),
       addrLine2 = useInputRef(validationError, 'addrLine2'),
       city      = useInputRef(validationError, 'city'),
       state     = useInputRef(validationError, 'state'),
-      zipCode   = useInputRef(validationError, 'zipCode'),
-      country   = useInputRef(validationError, 'country', Countries[0])
+      zipCode   = useInputRef(validationError, 'zipCode')
+
+const repo = new AddressService();
+
+const requestBody = computed(() => ({
+  first_name: firstName.value ?? '',
+  last_name: lastName.value ?? '',
+  line1: addrLine1.value ?? '',
+  line2: addrLine2.value ?? null,
+  city: city.value ?? '',
+  state: state.value?.slice(0, 2) ?? '',
+  zip_code: zipCode.value ?? ''
+}));
 
 async function update(): Promise<void> {
   const errors: ValidationErrors<InputKey> = {}
@@ -40,27 +52,26 @@ async function update(): Promise<void> {
     errors.state = 'must select one'
   if (zipCode.value?.length !== 5 || Number.isNaN(zipCode.value))
     errors.zipCode = 'must be 5-digit number'
-  if (!country.value)
-    errors.country = 'must select one'
 
   validationError.value = Object.keys(errors).length === 0
     ? undefined
     : errors
 
   if (validationError.value) {
-    return;
+    return
   }
 
   try {
-    // TODO: replace with real save
-    const result = await Promise.resolve("Success")
+    await repo.create(requestBody.value)
+
   } catch (e) {
+    console.error(e)
     // TODO: handle upstream errors
-    return;
+    return
   }
 
-  ;[firstName, lastName, addrLine1, addrLine2, city, state, zipCode].forEach(r => r.value = "")
-  country.value = Countries[0]
+  ;[firstName, lastName, addrLine1, addrLine2, city, state, zipCode]
+    .forEach(r => r.value = "")
 }
 </script>
 
@@ -107,12 +118,6 @@ async function update(): Promise<void> {
       v-model="zipCode"
       label="Zip Code"
       :validationError="validationError?.zipCode"/>
-    <SelectInput
-      required
-      v-model="country"
-      :options="Countries"
-      label="Country"
-      :validationError="validationError?.country"/>
     <input
       type="submit"
       value="Submit"
