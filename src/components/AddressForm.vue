@@ -4,7 +4,8 @@ import SelectInput from './SelectInput.vue'
 import { States } from '../Constants.ts'
 import { useInputRef, useValidationErrors, ValidationErrors } from '../composables/InputVar.ts'
 import { AddressService } from '../services/AddressService.ts'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import Alert from './Alert.vue'
 
 type InputKey =
   'firstName' |
@@ -37,7 +38,12 @@ const requestBody = computed(() => ({
   zip_code: zipCode.value ?? ''
 }));
 
+const messageKind = ref('warning')
+const message = ref('')
+
 async function update(): Promise<void> {
+  message.value = ''
+
   const errors: ValidationErrors<InputKey> = {}
 
   if (!firstName.value?.length)
@@ -63,10 +69,11 @@ async function update(): Promise<void> {
 
   try {
     await repo.create(requestBody.value)
-
-  } catch (e) {
-    console.error(e)
-    // TODO: handle upstream errors
+  } catch (e: Error) {
+    messageKind.value = e.message.includes('good to go')
+      ? 'warning'
+      : 'error'
+    message.value = e.message
     return
   }
 
@@ -76,52 +83,55 @@ async function update(): Promise<void> {
 </script>
 
 <template>
-  <form
-    @submit.prevent="update"
-    class="grid grid-cols-2 gap-2 min-w-72 w-full max-w-xl p-4 pb-6 border-2 rounded-2xl shadow-xl">
-    <TextInput
-      required
-      v-model="firstName"
-      label="First Name"
-      class="col-span-2 sm:col-span-1"
-      :validationError="validationError?.firstName"/>
-    <TextInput
-      required
-      v-model="lastName"
-      label="Last Name"
-      class="col-span-2 sm:col-span-1"
-      :validationError="validationError?.lastName"/>
-    <TextInput
-      required
-      v-model="addrLine1"
-      label="Address Line 1"
-      class="col-span-2"
-      :validationError="validationError?.addrLine1"/>
-    <TextInput
-      v-model="addrLine2"
-      label="Address Line 2"
-      class="col-span-2"/>
-    <TextInput
-      required
-      v-model="city"
-      label="City"
-      class="col-span-2"
-      :validationError="validationError?.city"/>
-    <SelectInput
-      required
-      v-model="state"
-      :options="States"
-      label="State"
-      :validationError="validationError?.state"/>
-    <TextInput
-      required
-      v-model="zipCode"
-      label="Zip Code"
-      :validationError="validationError?.zipCode"/>
-    <input
-      type="submit"
-      value="Submit"
-      class="btn btn-primary col-span-2 mt-3"
-      :disabled="!!validationError"/>
-  </form>
+  <div class="min-w-72 w-full max-w-xl flex flex-col gap-y-2">
+    <Alert :kind="messageKind" :show="!!message" :message="message"/>
+    <form
+      @submit.prevent="update"
+      class="grid grid-cols-2 gap-2 border-2 p-4 pb-6 rounded-2xl shadow-xl">
+      <TextInput
+        required
+        v-model="firstName"
+        label="First Name"
+        class="col-span-2 sm:col-span-1"
+        :validationError="validationError?.firstName"/>
+      <TextInput
+        required
+        v-model="lastName"
+        label="Last Name"
+        class="col-span-2 sm:col-span-1"
+        :validationError="validationError?.lastName"/>
+      <TextInput
+        required
+        v-model="addrLine1"
+        label="Address Line 1"
+        class="col-span-2"
+        :validationError="validationError?.addrLine1"/>
+      <TextInput
+        v-model="addrLine2"
+        label="Address Line 2"
+        class="col-span-2"/>
+      <TextInput
+        required
+        v-model="city"
+        label="City"
+        class="col-span-2"
+        :validationError="validationError?.city"/>
+      <SelectInput
+        required
+        v-model="state"
+        :options="States"
+        label="State"
+        :validationError="validationError?.state"/>
+      <TextInput
+        required
+        v-model="zipCode"
+        label="Zip Code"
+        :validationError="validationError?.zipCode"/>
+      <input
+        type="submit"
+        value="Submit"
+        class="btn btn-primary col-span-2 mt-3"
+        :disabled="!!validationError"/>
+    </form>
+  </div>
 </template>

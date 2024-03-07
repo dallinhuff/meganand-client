@@ -21,6 +21,10 @@ export class AddressService {
       .insert(request)
 
     if (error) {
+      const {message} = error
+      if (message.includes('duplicate key')) {
+        throw new Error("Someone in your household has already requested an invitation. You're good to go!")
+      }
       throw new Error(error.message)
     }
   }
