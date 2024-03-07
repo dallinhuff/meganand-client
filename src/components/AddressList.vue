@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { Address, AddressService } from '../services/AddressService.ts'
+  import AddressService from '../services/AddressService.ts'
+  import Address from '../models/Address.ts'
 
   const addresses = ref<Address[]>([])
 

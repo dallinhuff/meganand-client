@@ -7,6 +7,7 @@ const title = "Megan & Dallin"
 
 const tabOptions = [
   {id: '/home', label: 'Home'},
+  {id: '/submit', label: 'Submit Address'},
   {id: '/login', label: 'Login'}
 ]
 

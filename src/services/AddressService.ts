@@ -1,14 +1,5 @@
 import { supabase } from '../lib/supabaseClient.ts'
-
-export type Address = {
-  first_name: string
-  last_name: string
-  line1: string
-  line2: string | null
-  city: string
-  state: string
-  zip_code: string
-}
+import Address from '../models/Address.ts'
 
 export class AddressService {
   /**
@@ -66,3 +57,5 @@ export class AddressService {
     return count ?? 0
   }
 }
+
+export default AddressService
