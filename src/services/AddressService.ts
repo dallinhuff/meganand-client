@@ -26,7 +26,11 @@ export class AddressService {
    * @return all submitted addresses
    */
   async read(): Promise<Address[]> {
-    const {data, error, statusText} = await supabase.from('address').select('*')
+    const {data, error, statusText} = await supabase
+      .from('address')
+      .select('*')
+      .order('last_name')
+      .order('first_name')
 
     if (error) {
       throw new Error(statusText)
