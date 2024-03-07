@@ -3,13 +3,16 @@ import TextInput from './TextInput.vue'
 import { useInputRef, useValidationErrors, ValidationErrors } from '../composables/InputVar.ts'
 import { signInWithEmail } from '../services/AuthService.ts'
 import PasswordInput from './PasswordInput.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const validationError = useValidationErrors<'email' | 'password'>()
 
 const email    = useInputRef(validationError, 'email'),
       password = useInputRef(validationError, 'password')
 
-const update = async () => {
+const submit = async () => {
   const errors: ValidationErrors<'email' | 'password'> = {}
   const e = email.value ?? ''
   const p = password.value ?? ''
@@ -19,16 +22,30 @@ const update = async () => {
   if (!p.length)
     errors.password = 'cannot be blank'
 
-  await signInWithEmail(e, p)
+  if (Object.keys(errors).length > 0) {
+    validationError.value = errors
+    return
+  }
 
-  ;[email, password].forEach(v => v.value = '')
+  try {
+    await signInWithEmail(e, p)
+  } catch (error) {
+    errors.email = errors.password = (error as Error).message
+    validationError.value = errors
+    return
+  }
+
+  email.value = ''
+  password.value = ''
+
+  await router.push('/addresses')
 }
 
 </script>
 
 <template>
   <form
-    @submit.prevent="update"
+    @submit.prevent="submit"
     class="flex flex-col gap-2 min-w-72 w-full max-w-xl p-4 pb-6 border-2 rounded-2xl shadow-xl">
     <TextInput
       required
@@ -43,7 +60,6 @@ const update = async () => {
     <input
       type="submit"
       value="Login"
-      class="btn btn-primary mt-3"
-      :disabled="!!validationError"/>
+      class="btn btn-primary mt-3"/>
   </form>
 </template>

@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabaseClient.ts'
 
-type Address = {
+export type Address = {
   first_name: string
   last_name: string
   line1: string
@@ -11,25 +11,54 @@ type Address = {
 }
 
 export class AddressService {
+  /**
+   * submit an address to the guest list
+   * @param request the invitee's name and address
+   */
   async create(request: Address): Promise<void> {
-    const result = await supabase
+    const {error} = await supabase
       .from('address')
       .insert(request)
 
-    if (result.status !== 201) {
-      throw new Error(result.statusText);
+    if (error) {
+      throw new Error(error.message)
     }
   }
 
-  async delete(id: number): Promise<void> {
-    const {status, statusText, count} = await supabase
+  /**
+   * read all submitted addresses
+   * (requires authentication)
+   * @return all submitted addresses
+   */
+  async read(): Promise<Address[]> {
+    const {data, error, statusText} = await supabase
+      .from('address')
+      .select('*')
+
+    if (error) {
+      throw new Error(statusText)
+    }
+
+    return data
+  }
+
+  /**
+   * delete an address by id
+   * (requires authentication)
+   * @param id the id of the address to delete
+   * @return the number of addresses deleted (should be 1)
+   */
+  async delete(id: number): Promise<number> {
+    const {count, error} = await supabase
       .from('address')
       .delete()
       .eq('id', id)
       .single();
 
-    if (status >= 400 || (count ?? 0) < 1) {
-      throw new Error(statusText);
+    if (error) {
+      throw new Error(error.message);
     }
+
+    return count ?? 0
   }
 }
