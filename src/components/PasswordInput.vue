@@ -7,7 +7,6 @@ defineProps<{
 }>()
 
 const modelValue = defineModel<string>({required: true})
-
 </script>
 
 <template>
@@ -17,11 +16,13 @@ const modelValue = defineModel<string>({required: true})
         {{ label }}
         <span v-if="required" class="text-red-600 font-bold">*</span>
       </span>
-      <span v-if="validationError" class="label-text text-error">{{validationError}}</span>
+      <span v-if="validationError" class="label-text text-error">{{
+        validationError
+      }}</span>
     </div>
     <input
       type="password"
-      :placeholder=placeholder
+      :placeholder="placeholder"
       :class="['input input-bordered', {'input-error': !!validationError}]"
       v-model="modelValue"
     />

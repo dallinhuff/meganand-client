@@ -1,6 +1,4 @@
-export const Countries: readonly string[] = [
-  'US - United States of America'
-]
+export const Countries: readonly string[] = ['US - United States of America']
 
 export const States: readonly string[] = [
   'AL - Alabama',
@@ -58,5 +56,5 @@ export const States: readonly string[] = [
   'GU - Guam',
   'MP - Northern Mariana Islands',
   'PR - Puerto Rico',
-  'VI - US Virgin Islands'
+  'VI - US Virgin Islands',
 ]

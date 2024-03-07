@@ -1,7 +1,9 @@
-import { computed, ref, Ref } from 'vue'
+import {computed, ref, Ref} from 'vue'
 
 export type ValidationErrors<K extends string> = {[k in K]?: string}
-export type ValidationRef<K extends string> = Ref<ValidationErrors<K> | undefined>
+export type ValidationRef<K extends string> = Ref<
+  ValidationErrors<K> | undefined
+>
 
 /**
  * Create a reactive ref for holding form validation errors
@@ -19,13 +21,13 @@ export function useValidationErrors<K extends string>(): ValidationRef<K> {
 export function useInputRef<K extends string>(
   validationErrors: Ref<{[k in K]?: string} | undefined>,
   key: K,
-  initialVal?: string
+  initialVal?: string,
 ) {
-  const r = ref<string | undefined>(initialVal ?? "")
+  const r = ref<string>(initialVal ?? '')
 
   return computed({
     get: () => r.value,
-    set(v: string | undefined): void {
+    set(v: string): void {
       if (validationErrors.value) {
         delete validationErrors.value[key]
       }
@@ -38,6 +40,6 @@ export function useInputRef<K extends string>(
       }
 
       r.value = v
-    }
+    },
   })
 }

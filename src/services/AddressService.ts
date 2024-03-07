@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabaseClient.ts'
+import {supabase} from '../lib/supabaseClient.ts'
 import Address from '../models/Address.ts'
 
 export class AddressService {
@@ -7,14 +7,14 @@ export class AddressService {
    * @param request the invitee's name and address
    */
   async create(request: Address): Promise<void> {
-    const {error} = await supabase
-      .from('address')
-      .insert(request)
+    const {error} = await supabase.from('address').insert(request)
 
     if (error) {
       const {message} = error
       if (message.includes('duplicate key')) {
-        throw new Error("Someone in your household has already requested an invitation. You're good to go!")
+        throw new Error(
+          "Someone in your household has already requested an invitation. You're good to go!",
+        )
       }
       throw new Error(error.message)
     }
@@ -26,9 +26,7 @@ export class AddressService {
    * @return all submitted addresses
    */
   async read(): Promise<Address[]> {
-    const {data, error, statusText} = await supabase
-      .from('address')
-      .select('*')
+    const {data, error, statusText} = await supabase.from('address').select('*')
 
     if (error) {
       throw new Error(statusText)
@@ -48,10 +46,10 @@ export class AddressService {
       .from('address')
       .delete()
       .eq('id', id)
-      .single();
+      .single()
 
     if (error) {
-      throw new Error(error.message);
+      throw new Error(error.message)
     }
 
     return count ?? 0
