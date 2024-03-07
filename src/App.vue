@@ -16,7 +16,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="drawer">
+  <div class="drawer h-screen sm:bg-dancing md:bg-groundrats bg-sitting sm:bg-center md:bg-top bg-left-bottom bg-fixed bg-cover">
     <input
       id="toggle-nav-drawer"
       type="checkbox"
