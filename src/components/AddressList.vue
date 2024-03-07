@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import AddressService from '../services/AddressService.ts'
-import Address from '../models/Address.ts'
+import Address, {prettyPrintAddress} from '../models/Address.ts'
+import CsvService from '../services/CsvService.ts'
 
 const service = new AddressService()
 const addresses = ref<Address[]>([])
@@ -10,10 +11,43 @@ loadAddresses()
 async function loadAddresses(): Promise<void> {
   addresses.value = await service.read()
 }
+
+function exportAddresses(format: 'csv' | 'plain') {
+  const filename = `Megan & Dallin Addresses — ${new Date().toLocaleDateString()}`
+  switch (format) {
+    case 'plain':
+      CsvService.downloadBlob(
+        filename,
+        addresses.value.map(prettyPrintAddress).join('\n\n'),
+        format
+      )
+      break
+    case 'csv':
+      CsvService.exportToCsv(
+      filename,
+      addresses.value,
+      [
+        'first_name',
+        'last_name',
+        'line1',
+        'line2',
+        'city',
+        'state',
+        'zip_code'
+      ]
+    )
+  }
+  //
+
+}
 </script>
 
 <template>
   <div class="overflow-x-auto">
+    <div class="flex justify-end gap-x-2 pb-4">
+      <button class="btn" @click="exportAddresses('csv')">Download CSV</button>
+      <button class="btn" @click="exportAddresses('plain')">Download Text</button>
+    </div>
     <table class="table table-zebra">
       <thead>
         <tr>

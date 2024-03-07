@@ -84,6 +84,8 @@ async function update(): Promise<void> {
     return
   }
 
+  messageKind.value = 'success'
+  message.value = "Thanks! You're all set."
   ;[firstName, lastName, addrLine1, addrLine2, city, state, zipCode].forEach(
     (r) => (r.value = ''),
   )
