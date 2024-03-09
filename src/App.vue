@@ -66,7 +66,7 @@ const route = useRoute()
           </a>
           <a
             class="font-medium link-hover"
-            href="mailto:pearl@loertscher.org?subject=Big Bugs On MeganAndDallin"
+            href="mailto:pearl@loertscher.org?subject=Big Bugs on MeganAnd 🪲"
           >
             Report a bug
           </a>
