@@ -65,8 +65,8 @@ const route = useRoute()
             <img src="/instagram.svg" alt="instagram logo" class="w-7" />
           </a>
           <a
-              class="font-medium link-hover"
-              href="mailto:pearl@loertscher.org?subject=Big Bugs On MeganAndDallin"
+            class="font-medium link-hover"
+            href="mailto:pearl@loertscher.org?subject=Big Bugs On MeganAndDallin"
           >
             Report a bug
           </a>

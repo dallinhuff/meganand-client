@@ -38,14 +38,22 @@ function exportAddresses(format: 'csv' | 'plain') {
 <template>
   <div class="overflow-x-auto">
     <div class="flex justify-end gap-x-2 pb-4">
-      <button class="btn" @click="exportAddresses('csv')">Download CSV</button>
-      <button class="btn" @click="exportAddresses('plain')">
+      <button
+        class="btn btn-secondary sm:btn-primary"
+        @click="exportAddresses('csv')"
+      >
+        Download CSV
+      </button>
+      <button
+        class="btn btn-secondary sm:btn-primary"
+        @click="exportAddresses('plain')"
+      >
         Download Text
       </button>
     </div>
-    <table class="table table-zebra">
-      <thead>
-        <tr>
+    <table class="table bg-accent bg-opacity-50 backdrop-blur mt rounded-xl">
+      <thead class="text-sm text-accent-content">
+        <tr class="border-accent-content">
           <th></th>
           <th>First</th>
           <th>Last</th>
@@ -57,7 +65,7 @@ function exportAddresses(format: 'csv' | 'plain') {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(address, index) in addresses">
+        <tr v-for="(address, index) in addresses" class="border-accent-content">
           <th>{{ index + 1 }}</th>
           <td>{{ address.first_name }}</td>
           <td>{{ address.last_name }}</td>
