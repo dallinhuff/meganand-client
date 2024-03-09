@@ -24,7 +24,7 @@ const route = useRoute()
       v-model="expanded"
       class="drawer-toggle"
     />
-    <div class="drawer-content flex flex-col">
+    <div class="drawer-content h-screen overflow-y-auto">
       <!-- Navbar -->
       <div class="w-full navbar">
         <div class="flex-none sm:hidden">
@@ -57,6 +57,7 @@ const route = useRoute()
         <router-view />
       </main>
       <footer
+        v-if="route.path === tabOptions[0].id"
         class="fixed bottom-0 footer p-2 text-accent flex flex-row justify-between"
       >
         <nav class="flex flex-row items-center">
@@ -71,9 +72,9 @@ const route = useRoute()
           </a>
         </nav>
         <nav class="flex flex-row items-center font-medium">
-          <router-link class="link-hover mt-1.5" to="/login"
-            >Admin Login</router-link
-          >
+          <router-link class="link-hover mt-1.5" to="/login">
+            Admin Login
+          </router-link>
         </nav>
       </footer>
     </div>
