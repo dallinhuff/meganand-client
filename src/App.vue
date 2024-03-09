@@ -79,7 +79,7 @@ const route = useRoute()
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <ul class="menu p-4 w-80 min-h-full bg-base-100">
+      <ul class="menu p-4 w-64 min-h-full bg-base-100 glassy text-accent">
         <li v-for="option in tabOptions" :key="option.id">
           <router-link :to="option.id" @click="expanded = false">{{
             option.label
