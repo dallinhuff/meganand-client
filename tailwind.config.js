@@ -4,22 +4,23 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'groundrats': "url('/public/groundrats.jpg')",
-        'sitting': "url('/public/sitting.jpg')",
-        'dancing': "url('/public/dancingred.jpg')"
-      }
+        sitting: "url('/sitting.jpg')",
+        dancing: "url('/dancingred.jpg')",
+      },
     },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: [{
-      mytheme: {
-        "primary": "#17625b",
-        "secondary": "#67adb9",
-        "accent": "#f16f43",
-        "neutral": "#d1d6e8",
-        "base-100": "#f1e6dd",
+    themes: [
+      {
+        mytheme: {
+          primary: '#175962',
+          secondary: '#ad4a1c',
+          accent: 'rgb(232,232,232)',
+          neutral: '#175962',
+          'base-100': '#f1e6dd',
+        },
       },
-    }],
+    ],
   },
 }

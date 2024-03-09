@@ -1,12 +1,30 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Countdown from './Countdown.vue'
+</script>
 
 <template>
-  <div>
-
-    <div class="flex flex-col gap-y-2">
-      <router-link class="link" to="/submit">Click me to give us your address!</router-link>
-      <a class="link" href="https://www.amazon.com/wedding/share/megananddallinhuff">Click me to see our registry! 😈</a>
+  <div class="flex flex-col gap-y-10 place-items-center">
+    <div
+      class="sm:text-5xl text-4xl font-extrabold font-serif text-center mt-3"
+    >
+      <span class="text-accent opacity-85">✨🪩🥂Come </span>
+      <span class="text-accent opacity-85 text-nowrap">celebrate!🎉❤️‍🔥🪱</span>
     </div>
-
+    <Countdown></Countdown>
+    <div class="flex flex-col gap-y-4 w-2/4">
+      <button class="btn sm:btn-primary btn-secondary place-self-center">
+        <router-link to="/submit" class="font-serif font-thin">
+          Give us your address! 😽
+        </router-link>
+      </button>
+      <button class="btn btn-secondary sm:btn-primary place-self-center">
+        <a
+          class="font-serif font-thin"
+          href="https://www.amazon.com/wedding/share/megananddallinhuff"
+        >
+          See our registry! 😼
+        </a>
+      </button>
+    </div>
   </div>
 </template>

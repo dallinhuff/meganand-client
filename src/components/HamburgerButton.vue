@@ -12,7 +12,7 @@ const props = defineProps<{for: string}>()
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      class="inline-block w-6 h-6 stroke-current"
+      class="inline-block w-6 h-6 stroke-accent"
     >
       <path
         stroke-linecap="round"

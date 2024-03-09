@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.glassy {
+  @apply border-0 bg-opacity-20 backdrop-blur bg-accent;
+}
+
+.btn-glassy {
+  @apply glassy btn btn-accent;
+}

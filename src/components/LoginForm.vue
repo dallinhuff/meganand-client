@@ -61,7 +61,7 @@ const submit = async () => {
     />
     <form
       @submit.prevent="submit"
-      class="flex flex-col gap-2 p-4 pb-6 border-2 rounded-2xl shadow-xl"
+      class="flex flex-col gap-2 p-4 pb-6 border-2 rounded-2xl shadow-xl glassy"
     >
       <TextInput
         required
@@ -75,7 +75,11 @@ const submit = async () => {
         label="Password"
         :validationError="validationError?.password"
       />
-      <input type="submit" value="Login" class="btn btn-primary mt-3" />
+      <input
+        type="submit"
+        value="Login"
+        class="btn btn-secondary sm:btn-primary mt-3"
+      />
     </form>
   </div>
 </template>

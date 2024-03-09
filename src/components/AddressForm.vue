@@ -97,7 +97,7 @@ async function update(): Promise<void> {
     <Alert :kind="messageKind" :show="!!message" :message="message" />
     <form
       @submit.prevent="update"
-      class="grid grid-cols-2 gap-2 border-2 p-4 pb-6 rounded-2xl shadow-xl"
+      class="grid grid-cols-2 gap-2 border-2 p-4 pb-6 rounded-2xl shadow-xl glassy"
     >
       <TextInput
         required
@@ -148,7 +148,7 @@ async function update(): Promise<void> {
       <input
         type="submit"
         value="Submit"
-        class="btn btn-primary col-span-2 mt-3"
+        class="btn btn-secondary sm:btn-primary col-span-2 mt-3"
         :disabled="!!validationError"
       />
     </form>

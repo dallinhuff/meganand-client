@@ -12,7 +12,7 @@ const modelValue = defineModel<string>({required: true})
 <template>
   <label :class="['form-control']">
     <div class="label">
-      <span class="label-text">
+      <span class="label-text text-gray-100">
         {{ label }}
         <span v-if="required" class="text-red-600 font-bold">*</span>
       </span>
