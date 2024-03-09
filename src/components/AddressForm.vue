@@ -42,7 +42,8 @@ const requestBody = computed(() => ({
   zip_code: zipCode.value,
 }))
 
-const messageKind = ref<'success' | 'warning' | 'error'>('warning')
+type MessageKind = 'success' | 'warning' | 'error'
+const messageKind = ref<MessageKind>('warning')
 const message = ref('')
 
 async function update(): Promise<void> {
