@@ -5,7 +5,7 @@ export default {
     extend: {
       backgroundImage: {
         sitting: "url('/sitting.jpg')",
-        dancing: "url('/dancingred.jpg')",
+        dancing: "url('/dancing.jpg')",
       },
     },
   },
