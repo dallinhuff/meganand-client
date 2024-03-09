@@ -12,6 +12,8 @@ export type Database = {
       address: {
         Row: {
           city: string
+          edit_date: string
+          exported: boolean
           first_name: string
           id: number
           last_name: string
@@ -22,6 +24,8 @@ export type Database = {
         }
         Insert: {
           city: string
+          edit_date?: string
+          exported?: boolean
           first_name: string
           id?: number
           last_name: string
@@ -32,6 +36,8 @@ export type Database = {
         }
         Update: {
           city?: string
+          edit_date?: string
+          exported?: boolean
           first_name?: string
           id?: number
           last_name?: string

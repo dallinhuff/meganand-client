@@ -12,19 +12,18 @@ import Countdown from './Countdown.vue'
     </div>
     <Countdown></Countdown>
     <div class="flex flex-col gap-y-4 w-2/4">
-      <button class="btn sm:btn-primary btn-secondary place-self-center">
-        <router-link to="/submit" class="font-serif font-thin">
-          Give us your address! 😽
-        </router-link>
-      </button>
-      <button class="btn btn-secondary sm:btn-primary place-self-center">
-        <a
-          class="font-serif font-thin"
-          href="https://www.amazon.com/wedding/share/megananddallinhuff"
-        >
-          See our registry! 😼
-        </a>
-      </button>
+      <router-link
+        to="/submit"
+        class="btn sm:btn-primary btn-secondary place-self-center font-serif font-thin"
+      >
+        Give us your address! 😽
+      </router-link>
+      <a
+        class="btn btn-secondary sm:btn-primary place-self-center font-serif font-thin"
+        href="https://www.amazon.com/wedding/share/megananddallinhuff"
+      >
+        See our registry! 😼
+      </a>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 import {supabase} from '../lib/supabaseClient.ts'
-import Address from '../models/Address.ts'
+import Address, {SavedAddress} from '../models/Address.ts'
 
 export class AddressService {
   /**
@@ -25,7 +25,7 @@ export class AddressService {
    * (requires authentication)
    * @return all submitted addresses
    */
-  async read(): Promise<Address[]> {
+  async read(): Promise<SavedAddress[]> {
     const {data, error, statusText} = await supabase
       .from('address')
       .select('*')
@@ -57,6 +57,20 @@ export class AddressService {
     }
 
     return count ?? 0
+  }
+
+  async markAsExported(ids: number[]): Promise<SavedAddress[]> {
+    const {data, error} = await supabase
+      .from('address')
+      .update({exported: true})
+      .in('id', ids)
+      .select()
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    return data
   }
 }
 

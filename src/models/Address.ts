@@ -8,6 +8,12 @@ export type Address = {
   zip_code: string
 }
 
+export type SavedAddress = Address & {
+  id: number
+  edit_date: string
+  exported: boolean
+}
+
 export function prettyPrintAddress(address: Address): string {
   const fullName = `${address.first_name} ${address.last_name}`
   const streetAddr = address.line2

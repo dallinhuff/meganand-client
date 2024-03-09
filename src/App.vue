@@ -8,7 +8,6 @@ const title = 'Megan & Dallin'
 const tabOptions = [
   {id: '/home', label: 'Home'},
   {id: '/submit', label: 'Submit Address'},
-  {id: '/login', label: 'Login'},
 ]
 
 const expanded = ref(false)
@@ -58,7 +57,7 @@ const route = useRoute()
         <router-view />
       </main>
       <footer
-        class="fixed bottom-0 footer p-2 text-accent flex flex-row justify-start content-baseline"
+        class="fixed bottom-0 footer p-2 text-accent flex flex-row justify-between"
       >
         <nav class="flex flex-row items-center">
           <a href="https://instagram.com/dallin.huff">
@@ -70,6 +69,11 @@ const route = useRoute()
           >
             Report a bug
           </a>
+        </nav>
+        <nav class="flex flex-row items-center font-medium">
+          <router-link class="link-hover mt-1.5" to="/login"
+            >Admin Login</router-link
+          >
         </nav>
       </footer>
     </div>
