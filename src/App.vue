@@ -17,7 +17,7 @@ const route = useRoute()
 
 <template>
   <div
-    class="drawer h-screen sm:bg-dancing bg-sitting sm:bg-top bg-left-bottom bg-fixed bg-cover"
+    class="drawer h-screen sm:bg-dancing bg-sitting sm:bg-top bg-fixed bg-cover"
   >
     <input
       id="toggle-nav-drawer"
