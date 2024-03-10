@@ -16,13 +16,13 @@ import Countdown from './Countdown.vue'
     <div class="flex flex-col gap-y-4 w-2/4">
       <router-link
         to="/submit"
-        class="btn sm:btn-primary btn-secondary btn-sm place-self-center font-serif font-thin"
+        class="btn sm:btn-primary btn-secondary btn-sm place-self-center font-serif font-thin whitespace-nowrap"
       >
         Give us your address! 😽
       </router-link>
 
       <a
-        class="btn sm:btn-primary btn-secondary btn-sm place-self-center font-serif font-thin"
+        class="btn sm:btn-primary btn-secondary btn-sm place-self-center font-serif font-thin whitespace-nowrap"
         href="https://www.amazon.com/wedding/share/megananddallinhuff"
       >
         See our registry! 😼
