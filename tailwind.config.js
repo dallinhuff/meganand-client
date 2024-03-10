@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        sitting: "url('/sitting.jpg')",
+        window: "url('/window.jpg')",
         dancing: "url('/dancing.jpg')",
       },
     },
@@ -14,9 +14,9 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: '#175962',
-          secondary: '#ad4a1c',
-          accent: 'rgb(232,232,232)',
+          primary: '#2a454d',
+          secondary: '#0e5953',
+          accent: '#E8E8E8FF',
           neutral: '#175962',
           'base-100': '#f1e6dd',
         },

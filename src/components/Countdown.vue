@@ -33,13 +33,13 @@ onBeforeUnmount(() => clearInterval(timer))
 
 <template>
   <div
-    class="grid grid-flow-col gap-5 text-center text-secondary sm:text-primary font-serif auto-cols-max"
+    class="grid grid-flow-col gap-5 text-center sm:text-primary-content text-secondary-content font-serif auto-cols-max"
   >
     <div
       v-for="label in ['days', 'hours', 'minutes', 'seconds'] as TimeUnit[]"
       class="flex flex-col font-serif rounded-box glassy px-2 py-1"
     >
-      <span class="countdown font-sans font-light sm:text-6xl text-5xl">
+      <span class="countdown font-sans font-light text-5xl">
         <span :style="`--value:${timeLeft[label]};`"></span>
       </span>
       {{ label }}

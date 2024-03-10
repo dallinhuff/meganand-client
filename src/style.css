@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .glassy {
-  @apply border-0 sm:bg-opacity-5 bg-opacity-15 backdrop-blur bg-accent;
+  @apply border-0 sm:bg-opacity-5 bg-opacity-10 backdrop-blur bg-secondary sm:bg-primary;
 }
 
 .btn-glassy {
