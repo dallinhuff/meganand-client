@@ -123,7 +123,7 @@ async function update(): Promise<void> {
       />
       <TextInput
         v-model="addrLine2"
-        label="Address Line 2"
+        label="Apartment, suite, etc. (optional)"
         class="col-span-2"
       />
       <TextInput
